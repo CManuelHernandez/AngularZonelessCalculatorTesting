@@ -13,11 +13,11 @@ describe('CalculatorService', () => {
   afterEach(() => {});
   afterAll(() => {});
 
-  it('shold be created', () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('shold be create with default values', () => {
+  it('should be created with default values', () => {
     expect(service.resultText()).toBe('0');
     expect(service.subResultText()).toBe('0');
     expect(service.lastOperator()).toBe('+');
@@ -61,6 +61,34 @@ describe('CalculatorService', () => {
     expect(service.resultText()).toBe('3');
   });
 
+  it('should calculate result correctly for subtraction', () => {
+    service.constructNumber('5');
+    service.constructNumber('-');
+    service.constructNumber('2');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('3');
+  });
+
+  it('should calculate result correctly for multiplication', () => {
+    service.constructNumber('2');
+    service.constructNumber('*');
+    service.constructNumber('4');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('8');
+  });
+
+  it('should calculate result correctly for multiplication', () => {
+    service.constructNumber('1');
+    service.constructNumber('0');
+    service.constructNumber('/');
+    service.constructNumber('2');
+    service.constructNumber('=');
+
+    expect(service.resultText()).toBe('5');
+  });
+
   it('should handle decimal point correctly', () => {
     service.constructNumber('1');
     service.constructNumber('.');
@@ -69,6 +97,17 @@ describe('CalculatorService', () => {
     expect(service.resultText()).toBe('1.5');
     service.constructNumber('.');
     expect(service.resultText()).toBe('1.5');
+  });
+
+  it('should handle decimal point correctly starting with zero', () => {
+    service.constructNumber('0');
+    service.constructNumber('.');
+    service.constructNumber('.');
+    service.constructNumber('.');
+    service.constructNumber('.');
+    service.constructNumber('0');
+
+    expect(service.resultText()).toBe('0.0');
   });
 
   it('should handle sign change correctly', () => {
