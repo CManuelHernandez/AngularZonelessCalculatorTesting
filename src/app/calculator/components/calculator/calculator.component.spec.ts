@@ -83,4 +83,14 @@ describe('AppComponent', () => {
     expect(buttons[2].textContent?.trim()).toBe('%');
     expect(buttons[3].textContent?.trim()).toBe('÷');
   });
+
+  it('should handle keyboard events correctly', () => {
+    const eventEnter = new KeyboardEvent('keyup', { key: 'Enter' });
+    document.dispatchEvent(eventEnter);
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('=');
+
+    const eventESC = new KeyboardEvent('keyup', { key: 'Escape' });
+    document.dispatchEvent(eventESC);
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('C');
+  });
 });
