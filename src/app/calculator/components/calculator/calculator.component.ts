@@ -32,12 +32,12 @@ export class CalculatorComponent {
   //   return this.calculatorService.reslutText;
   // }
 
-  public resultText = computed(() => this.calculatorService.reslutText());
+  public resultText = computed(() => this.calculatorService.resultText());
   public subResultText = computed(() => this.calculatorService.subResultText());
   public lastOperator = computed(() => this.calculatorService.lastOperator());
 
   handleClick(key: string) {
-    console.log({ key });
+    this.calculatorService.constructNumber(key);
   }
 
   // @HostListener('document:keyup', ['$event'])
